@@ -1,6 +1,9 @@
 // Import express
 const express = require("express");
 const dotenv = require("dotenv");
+const cors = require("cors");
+const { readdirSync } = require("fs");
+const { connectDB } = require("./db/connection");
 
 // Initialize express app
 const app = express();
@@ -8,17 +11,33 @@ dotenv.config();
 
 // Port setup
 const port = process.env.PORT || 3001;
-const cors = require("cors");
-const { readdirSync } = require("fs");
-const { connectDB } = require("./db/connection");
 
-// handlling connection errors
-app.use(cors({ origin: process.env.CLIENT_URL }));
+// ✅ Updated CORS: allow local + deployed frontend
+const allowedOrigins = [
+  "http://localhost:5173",             // local dev frontend
+  "https://vibrantvela.vercel.app",    // deployed frontend
+];
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      // Allow requests with no origin (like Postman, curl)
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS: " + origin));
+      }
+    },
+    credentials: true,
+  })
+);
+
 app.use(express.json());
 
+// Connect to database
 connectDB();
 
-// get, put, post, delete
+// Test route
 app.get("/", (req, res) => {
   res.send(`<center><h1>Welcome to the Express Server on: ${port}</h1></center>`);
 });
@@ -28,7 +47,7 @@ readdirSync("./routes").map((route) =>
   app.use("/api", require(`./routes/${route}`))
 );
 
-// Start listening on port
+// Start server
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
