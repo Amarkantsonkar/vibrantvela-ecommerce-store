@@ -15,15 +15,19 @@ const port = process.env.PORT || 3001;
 // ✅ Updated CORS: allow local + deployed frontend
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://vibrantvela.vercel.app",
-  "https://vibrantvela-ecommerce-store-o9gh-oj5017t7j-amarkant20s-projects.vercel.app" // ← add this
+  "https://vibrantvela.vercel.app"
 ];
+
+const vercelPreviewRegex = /^https:\/\/vibrantvela-ecommerce-store.*\.vercel\.app$/;
 
 app.use(
   cors({
     origin: function (origin, callback) {
-      // Allow requests with no origin (like Postman, curl)
-      if (!origin || allowedOrigins.includes(origin)) {
+      if (
+        !origin ||
+        allowedOrigins.includes(origin) ||
+        vercelPreviewRegex.test(origin)
+      ) {
         callback(null, true);
       } else {
         callback(new Error("Not allowed by CORS: " + origin));
@@ -32,6 +36,7 @@ app.use(
     credentials: true,
   })
 );
+
 
 app.use(express.json());
 
