@@ -68,6 +68,7 @@ const CartProduct = ({
       [{ id: _id, quantity, color }],
       "123 Main street"
     );
+    dispatch(handleRemoveItem())
   };
 
   return (

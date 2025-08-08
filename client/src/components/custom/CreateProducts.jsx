@@ -224,9 +224,25 @@ const CreateProducts = () => {
                 <SelectTrigger>
                   <SelectValue placeholder="Select a category" />
                   <SelectContent>
-                    <SelectItem value="Keyboard">Keyboard</SelectItem>
+                    <SelectItem value="All">All</SelectItem>
                     <SelectItem value="Mouse">Mouse</SelectItem>
-                    <SelectItem value="Headset">Headset</SelectItem>
+                    <SelectItem value="Keyboard">Keyboard</SelectItem>
+                    <SelectItem value="Headphones">Headphones</SelectItem>
+                    <SelectItem value="Sneakers">Sneakers</SelectItem>
+                    <SelectItem value="Phone Chargers">
+                      Phone Chargers
+                    </SelectItem>
+                    <SelectItem value="Power Banks">Power Banks</SelectItem>
+                    <SelectItem value="Mobile Cases">Mobile Cases</SelectItem>
+                    <SelectItem value="Trimmers">Trimmers</SelectItem>
+                    <SelectItem value="Yoga Mats">Yoga Mats</SelectItem>
+                    <SelectItem value="Office Chairs">Office Chairs</SelectItem>
+                    <SelectItem value="Printed T-Shirts">
+                      Printed T-Shirts
+                    </SelectItem>
+                    <SelectItem value="Hoodies">Hoodies</SelectItem>
+                    <SelectItem value="Notebooks">Notebooks</SelectItem>
+                    <SelectItem value="Pet Toys">Pet Toys</SelectItem>
                   </SelectContent>
                 </SelectTrigger>
               </Select>
