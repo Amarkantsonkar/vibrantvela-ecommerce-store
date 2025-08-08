@@ -224,7 +224,7 @@ const CreateProducts = () => {
                 <SelectTrigger>
                   <SelectValue placeholder="Select a category" />
                   <SelectContent>
-                    <SelectItem value="All">All</SelectItem>
+                    <SelectItem value="All">All </SelectItem>
                     <SelectItem value="Mouse">Mouse</SelectItem>
                     <SelectItem value="Keyboard">Keyboard</SelectItem>
                     <SelectItem value="Headphones">Headphones</SelectItem>

@@ -14,8 +14,9 @@ const port = process.env.PORT || 3001;
 
 // ✅ Updated CORS: allow local + deployed frontend
 const allowedOrigins = [
-  "http://localhost:5173",             // local dev frontend
-  "https://vibrantvela.vercel.app",    // deployed frontend
+  "http://localhost:5173",
+  "https://vibrantvela.vercel.app",
+  "https://vibrantvela-ecommerce-store-o9gh-oj5017t7j-amarkant20s-projects.vercel.app" // ← add this
 ];
 
 app.use(
