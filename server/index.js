@@ -12,19 +12,27 @@ dotenv.config();
 // Port setup
 const port = process.env.PORT || 3001;
 
-// ✅ Updated CORS: allow local + deployed frontend
+// ✅ Updated CORS: allow localhost + main domain + Vercel preview domains
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://vibrantvela.vercel.app", // ← add this
+  "https://vibrantvela.vercel.app"
 ];
+
+// Allow preview deployments like:
+// https://vibrantvela-ecommerce-store-o9gh-abcde123.vercel.app
+const vercelPreviewRegex = /^https:\/\/vibrantvela-ecommerce-store.*\.vercel\.app$/;
 
 app.use(
   cors({
     origin: function (origin, callback) {
-      // Allow requests with no origin (like Postman, curl)
-      if (!origin || allowedOrigins.includes(origin)) {
+      if (
+        !origin || // Allow Postman/curl with no origin
+        allowedOrigins.includes(origin) ||
+        vercelPreviewRegex.test(origin)
+      ) {
         callback(null, true);
       } else {
+        console.log("❌ CORS blocked origin:", origin);
         callback(new Error("Not allowed by CORS: " + origin));
       }
     },
@@ -49,5 +57,5 @@ readdirSync("./routes").map((route) =>
 
 // Start server
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+  console.log(`✅ Server is running on port ${port}`);
 });
